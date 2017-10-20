@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Main!</title>
+    <style>
+    .top{
+        display: inline-block;
+        width: 100%;
+    }
+    #greeting{
+        width: 50%;
+    }
+    .box{
+        display: inline-block;
+        width: 50%;
+    }
+    </style>
+</head>
+<body>
+    <div class="top">
+        <h1 id="greeting">Welcome, {{request.session.name}}!</h1>
+        <a href="/books/add">Add Book and Review</a>
+        <a href="/logout">Logout</a>        
+    </div>
+    <div class="box">
+        <h3>Recent Book Reviews:</h3>
+        {% for review in reviews %}
+            <h4><a href="">{{review.book.name}}</a></h4>
+            <h5>Rating: {{review.rating}}/5</h5>
+            <p><a href="user_page{{review.user.id}}">{{review.user.first_name}} {{review.user.last_name}}</a> said: "{{ review.review }}"</p>
+            <p>Posted at: {{review.created_at}}</p>
+        {% endfor %}
+    </div>
+    <div class="box">
+        <h3>Other Books with Reviews:</h3>
+        {% for book in books %}
+        <table>
+            <td><a href="/book_page{{book.id}}">{{book.name}}</a></td>
+        </table>
+        
+        {% endfor %}
+    </div>
+</body>
+</html>
